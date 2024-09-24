@@ -8,7 +8,7 @@ public class mass {
 		// TODO Auto-generated method stub
 int[] names= {1,2,3,4,5,6};
 
-Arrays.stream(names).forEach(System.out::println);
+//Arrays.stream(names).forEach(System.out::println);
 	}
 
 }
