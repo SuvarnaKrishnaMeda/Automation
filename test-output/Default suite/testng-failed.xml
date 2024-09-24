@@ -3,14 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Scripts.ValidateStepstoFollowFunctionality">
+      <class name="Script.ValidateLoginFunctionality">
         <methods>
-          <include name="cleanup"/>
-          <include name="validatelogin"/>
+          <include name="methodd"/>
+          <include name="Endscript"/>
           <include name="init"/>
           <include name="method"/>
         </methods>
-      </class> <!-- Scripts.ValidateStepstoFollowFunctionality -->
+      </class> <!-- Script.ValidateLoginFunctionality -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

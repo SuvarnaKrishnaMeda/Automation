@@ -1,71 +1,58 @@
 package Pages;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 import com.aventstack.extentreports.Status;
 
-import Utilities.CommonFunctions;
+import Utilities.Commonfunctions;
 import Utilities.TestBase;
 
-public class LoginPage extends TestBase {
-	public LoginPage() {
+public class Loginpage extends TestBase {
+
+	public Loginpage() {
 		super();
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(xpath = "//input[@id = 'username']")
-	public WebElement userName;
+	@FindBy(how = How.XPATH, using = "//input[@id='user-name']")
+	public WebElement txt_username;
 
-	@FindBy(xpath = "//input[@id = 'password']")
-	public WebElement password;
+	@FindBy(how = How.XPATH, using = "//input[@id='login-button']")
+	public WebElement login;
 
-	@FindBy(xpath = "//button[@type = 'button']")
-	public WebElement logIn;
+	@FindBy(how = How.XPATH, using = "//input[@id='password']")
+	public WebElement txt_password;
 
-	@FindBy(xpath = "//div[@id='menu-button']")
-	public WebElement landingPageMenu;
-	
-	@FindBy(xpath = "//div[@id='menu-button']")
-	public List<WebElement> lst_landingPageMenu;
+	@FindBy(how = How.XPATH, using = "//a[text()='Logout']")
+	public WebElement logout;
 
-	public void loginmethod(String userId, String passwrd) {
+	@FindBy(how = How.XPATH, using = "//button[text()='Open Menu']")
+	public WebElement button_menu;
 
-		try {
-
-			CommonFunctions.enterText(userName, userId);
-			CommonFunctions.enterText(password, passwrd);
-			CommonFunctions.clickElement(logIn);
-			CommonFunctions.waitForPageLoaded();
-			String url = driver.getCurrentUrl();
-			Thread.sleep(2000);
-		if (lst_landingPageMenu.size()>0) {
-			//if (url == "https://growerPortal/landingPage") {
-				test.log(Status.PASS,
-						"Able to Login with the credentials provided :" + userId + " and Password :" + passwrd);
-
-			} else {
-				test.log(Status.FAIL, "Unable to login with the credentials provided");
-			}
-		} catch (Exception e) {
-			test.log(Status.FAIL, "Unable to execute method : loginmethod");
-			e.printStackTrace();
-
-		}
+	public void LoginFunctionality(String username, String password) throws InterruptedException {
+		Thread.sleep(4000);
+		Commonfunctions.EnterText(username, txt_username);
+		test.log(Status.PASS, "Successfully entered username :" + username);
+		Commonfunctions.EnterText(password, txt_password);
+		test.log(Status.PASS, "Successfully entered password :" + password);
+		Commonfunctions.ClickElement(login);
+		test.log(Status.PASS, "Successfully clicked login button :" + login.getText());
 	}
-	public void navigationMenu(String menuOption) {
+
+	public void Logout() {
 		try {
-			CommonFunctions.clickElement(landingPageMenu);
-			CommonFunctions.implicitWait(10);
-			driver.findElement(By.xpath("//a[text()='"+menuOption+"']")).click();
-			
-		 } catch (Exception e) {
-			test.log(Status.FAIL, "Unable to execute method : navigationMenu");
+			Commonfunctions.ClickElement(button_menu);
+			Thread.sleep(4000);
+
+			Commonfunctions.HighlightWebElement(logout);
+			Thread.sleep(2000);
+			Commonfunctions.ClickElement(logout);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		 }
+		}
 	}
 }
