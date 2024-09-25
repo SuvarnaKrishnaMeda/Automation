@@ -1,8 +1,0 @@
-Network\Ericsson\AppTest.class
-Pages\Loginpage.class
-Pages\AddtoCart.class
-Pages\Commonfunctionality.class
-Pages\Homepage.class
-Utilities\Commonfunctions.class
-Utilities\TestBase.class
-Script\ValidateLoginFunctionality.class

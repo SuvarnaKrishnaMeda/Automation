@@ -11,8 +11,8 @@ import Pages.Loginpage;
 import Utilities.TestBase;
 
 public class ValidateLoginFunctionality extends TestBase {
-	Loginpage loginpageObj;
-	AddtoCart AddtoCartobj;
+	public Loginpage loginpageObj;
+	public AddtoCart AddtoCartobj;
 
 	@BeforeClass
 	public void method() {
@@ -20,7 +20,7 @@ public class ValidateLoginFunctionality extends TestBase {
 		try {
 			parenttest = TestBase.extent.createTest("Items Adding to Cart");
 			driver = TestBase.LaunchUrl("https://www.saucedemo.com/", "chrome");
-			
+
 			AddtoCartobj = new AddtoCart();
 			loginpageObj = new Loginpage();
 		} catch (IOException e) {
@@ -40,7 +40,7 @@ public class ValidateLoginFunctionality extends TestBase {
 	@Test(priority = 2)
 	public void addToCart() {
 		try {
-			test=parenttest.createNode("Add to cart functionality");
+			test = parenttest.createNode("Add to cart functionality");
 			String[] iteamss = { "Sauce Labs Backpack", "Sauce Labs Bolt T-Shirt", "Sauce Labs Fleece Jacket" };
 			for (String each : iteamss) {
 				AddtoCartobj.SelectItemsByUsingLoop(each);
