@@ -31,6 +31,9 @@ public class Loginpage extends TestBase {
 
 	@FindBy(how = How.XPATH, using = "//button[text()='Open Menu']")
 	public WebElement button_menu;
+	
+	@FindBy(how=How.XPATH, using="//h3[@data-test='error']")
+	public WebElement error_display;
 
 	public void LoginFunctionality(String username, String password) throws InterruptedException {
 		Thread.sleep(4000);
@@ -39,7 +42,7 @@ public class Loginpage extends TestBase {
 		Commonfunctions.EnterText(password, txt_password);
 		test.log(Status.PASS, "Successfully entered password :" + password);
 		Commonfunctions.ClickElement(login);
-		test.log(Status.PASS, "Successfully clicked login button :" + login.getText());
+		test.log(Status.PASS, "Successfully clicked login button " );
 	}
 
 	public void Logout() {
@@ -54,5 +57,14 @@ public class Loginpage extends TestBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public void ErrorDisplay(String text) {
+		if(error_display.getText().equalsIgnoreCase(text)) {
+			test.pass("Locked user failed to login and succesfully found the error message : "+ text);
+		}
+		else {
+			test.fail("Locked user not logined and not found the error message : "+ text);
+		}
+		
 	}
 }

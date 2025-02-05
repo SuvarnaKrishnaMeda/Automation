@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
@@ -27,6 +28,7 @@ public class TestBase {
 	public static Properties pr;
 	public static long PAGE_LOAD_TIMEOUT = 30;
 	public static long IMPLICIT_WAIT = 30;
+	public static Map<String, String> configMap;
 	public static ExtentHtmlReporter htmlreporter = null;
 	public static ExtentReports extent = null;
 	public static ExtentTest test = null;
@@ -54,11 +56,16 @@ public class TestBase {
 		return driver;
 	}
 
-	public static void Property() {
+	public  void Property() {
 		try {
 			pr = new Properties();
 			FileReader reader = new FileReader(path + "\\resources\\config.properties");
 			pr.load(reader);
+			configMap = new HashMap<String, String>();
+			for (String key: pr.stringPropertyNames()) {
+				configMap.put(key, pr.getProperty(key));
+			}
+		
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -84,7 +91,7 @@ public class TestBase {
 
 		htmlreporter = new ExtentHtmlReporter(destFile);
 		htmlreporter.loadXMLConfig("resources/extent-config.xml");
-
+		Property();
 		extent = new ExtentReports();
 		extent.attachReporter(htmlreporter);
 
